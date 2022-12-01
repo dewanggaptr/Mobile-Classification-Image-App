@@ -28,7 +28,7 @@ import java.nio.ByteOrder;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView result; //confidence;
+    TextView result, confidence;
     ImageView imageView;
     Button picture;
     int imageSize = 224;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         result = findViewById(R.id.result);
-        //confidence = findViewById(R.id.confidence);
+        confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         picture = findViewById(R.id.button);
 
@@ -99,13 +99,11 @@ public class MainActivity extends AppCompatActivity {
             }
             String[] classes = {"Kangkung", "Labu Siam", "Bayam"};
 
-            //result.setText(classes[maxPos]); //output text
+            result.setText(classes[maxPos] + ": "); //output text
 
             String s = "";
-            for(int i = 0; i < classes.length; i++){
-                s = String.format("%s: %.1f%%\n", classes[maxPos], confidences[i] * 100);
-            }
-            result.setText(s);
+            s = String.format("%.1f%%\n", confidences[maxPos] * 100);
+            confidence.setText(s);
 
             // Releases model resources if no longer used.
             model.close();
