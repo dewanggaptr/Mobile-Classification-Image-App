@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/logo"
     tools:context=".MainActivity">
 
-    <Button
+<Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:text="Take Picture"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="21sp"
-        android:textStyle="bold" />
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="43dp"
+        android:background="@drawable/ic_baseline_add_a_photo_24"
+        android:textAllCaps="false"/>
+
 
     <TextView
         android:id="@+id/title"
@@ -26,14 +30,17 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="-2dp"
-        android:layout_marginBottom="-14dp"
-        android:text="Welcome To Image Classification  "
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="-18dp"
+        android:text="SELAMAT DATANG DI SAYURAN CALSSIFICATION"
         android:textAlignment="center"
-        android:textSize="30dp"
-        android:textStyle="bold"></TextView>
+        android:textSize="20dp"
+        android:textStyle="bold">
+
+    </TextView>
 
     <ImageView
         android:layout_width="370sp"
