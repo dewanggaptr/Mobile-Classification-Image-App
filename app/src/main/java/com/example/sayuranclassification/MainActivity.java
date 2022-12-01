@@ -28,7 +28,7 @@ import java.nio.ByteOrder;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView result, confidence;
+    TextView result; //confidence;
     ImageView imageView;
     Button picture;
     int imageSize = 224;
@@ -39,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         result = findViewById(R.id.result);
-        confidence = findViewById(R.id.confidence);
+        //confidence = findViewById(R.id.confidence);
         imageView = findViewById(R.id.imageView);
         picture = findViewById(R.id.button);
 
+        // camera access
         picture.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //clasification process with tflite
     public void classifyImage(Bitmap image){
         try {
             Model model = Model.newInstance(getApplicationContext());
@@ -85,25 +87,25 @@ public class MainActivity extends AppCompatActivity {
             // Runs model inference and gets result.
             Model.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+            float[] confidences = outputFeature0.getFloatArray(); //get array model
 
-            float[] confidences = outputFeature0.getFloatArray();
             int maxPos = 0;
             float maxConfidence = 0;
-            for(int i = 0; i < confidences.length; i++){
+            for(int i = 0; i < confidences.length; i++){ // get biggest confidences
                 if(confidences[i] > maxConfidence){
                     maxConfidence = confidences[i];
                     maxPos = i;
                 }
             }
-            String[] classes = {"Bayam", "Kangkung", "Sawi Hijau", "Sawi Putih", "Labu Siam"};
+            String[] classes = {"Kangkung", "Labu Siam", "Bayam"};
 
-            result.setText(classes[maxPos]);
+            //result.setText(classes[maxPos]); //output text
 
             String s = "";
             for(int i = 0; i < classes.length; i++){
-                s += String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
+                s = String.format("%s: %.1f%%\n", classes[maxPos], confidences[i] * 100);
             }
-            confidence.setText(s);
+            result.setText(s);
 
             // Releases model resources if no longer used.
             model.close();
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //image handle
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
