@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //clasification process with tflite
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     public void classifyImage(Bitmap image){
         try {
             Model model = Model.newInstance(getApplicationContext());
@@ -97,12 +99,18 @@ public class MainActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"Kangkung", "Labu Siam", "Bayam"};
+            String[] sayuran = {"Kacang Panjang", "Bunga Kol", "Daun Prei", "Terung", "Labu Siam", "Kubis"};
 
-            result.setText(classes[maxPos] + ": "); //output text
+//            result.setText(sayuran[maxPos]); //output text
+            String r = "";
+            r = String.format("%s\n", sayuran[maxPos]);
+            result.setText(r);
 
             String s = "";
-            s = String.format("%.1f%%\n", confidences[maxPos] * 100);
+
+            for(int i = 0; i < sayuran.length; i++){
+                s = String.format("%.1f%%\n", confidences[maxPos] * 100);
+            }
             confidence.setText(s);
 
             // Releases model resources if no longer used.

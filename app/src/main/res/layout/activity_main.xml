@@ -99,12 +99,10 @@
         android:id="@+id/confidence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/classified"
+        android:layout_below="@+id/descText"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="3dp"
-
-        android:layout_toRightOf="@id/result"
         android:text=""
         android:textColor="#C30000"
         android:textSize="25sp" />
@@ -113,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/descText"
-        android:text="Deskripsi:"
+        android:text="Akurasi Kecocokan:"
         android:fontFamily="@font/font"
         android:textStyle="bold"
         android:textSize="20sp"
